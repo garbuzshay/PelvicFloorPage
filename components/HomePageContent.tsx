@@ -232,7 +232,6 @@ export default function HomePageContent({
       {/* Welcome Section */}
       <section>
         <h1 className="text-5xl font-bold text-center mb-4"> ברוכים הבאים </h1>
-        <p className="text-lg text-center">אילנה פיוזתרפיסטית</p>
       </section>
 
       {/* About Section (Dynamically fetched) */}

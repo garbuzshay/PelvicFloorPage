@@ -4,7 +4,11 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        hebrew: ['David Libre', 'sans-serif'], // Add the Hebrew font here
+      },
+    },
   },
   plugins: [],
 }
