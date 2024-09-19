@@ -315,7 +315,7 @@ export default function AdminEditMode() {
         {/* Treatments Section */}
         <div className="flex flex-col sm:flex-row sm:justify-between items-center mb-8 space-y-4 sm:space-y-0">
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-800">
-            Manage Treatments
+            ניהול תוכן
           </h1>
           <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
             <button
