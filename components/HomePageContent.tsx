@@ -1,5 +1,6 @@
+// import { useAbout } from "../hooks/useAbout"; // Import the new useAbout hook
 // import ContactForm from "./ContactForm";
-// import { useTreatments } from "../hooks/useTreatments"; // Import your custom hook
+// import { useTreatments } from "../hooks/useTreatments"; // Import your treatments hook
 
 // interface HomePageContentProps {
 //   setSelectedSection: (section: string) => void;
@@ -12,8 +13,11 @@
 //     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 //   };
 
+//   // Use the useAbout hook to fetch the About and Problems sections
+//   const { aboutData, loading: aboutLoading, error: aboutError } = useAbout();
+  
 //   // Use the useTreatments hook to fetch treatments from Firestore
-//   const { treatments, loading, error } = useTreatments();
+//   const { treatments, loading: treatmentsLoading, error: treatmentsError } = useTreatments();
 
 //   const handleFormSubmit = async (data: {
 //     name: string;
@@ -41,30 +45,24 @@
 //     }
 //   };
 
+//   if (aboutLoading || treatmentsLoading) return <p>Loading...</p>;
+//   if (aboutError || treatmentsError)
+//     return <p>Error: {aboutError || treatmentsError}</p>;
+
+
+
+  
 //   return (
 //     <div className="max-w-screen-xlg mx-auto">
 //       {/* Welcome Section */}
 //       <section>
-//         <h1 className="text-5xl font-bold text-center mb-4"> ברוכים הבאים </h1>
-//         <p className="text-lg text-center">אילנה פיוזתרפיסטית</p>
+//         <h1 className="text-5xl font-bold text-center mb-4"> Wellcome</h1>
 //       </section>
 
-//       {/* Description Section */}
+//       {/* About Section (Dynamically fetched) */}
 //       <section className="bg-gray-200 rounded-3xl shadow-lg p-8 mb-12">
 //         <div dir="rtl" className="text-center text-xl text-gray-700 space-y-6">
-//           <p>
-//             כפיזיותרפיסטית המתמחה ברצפת האגן, אני מציעה טיפול ממוקד לשיפור תפקוד
-//             השרירים, המסייע בבעיות כמו בריחת שתן, צניחת איברים, וכאבים בזמן
-//             יחסים.
-//           </p>
-//           <p>
-//             תוכנית אישית תותאם לך לאחר אבחון מעמיק, וכוללת תרגילים, ייעוץ
-//             תזונתי, ושיפור היציבה.
-//           </p>
-//           <p>
-//             טכניקות מתקדמות כמו ביופידבק וטיפול מנואלי יעזרו לך לחזור לשליטה
-//             מלאה בתפקודי הגוף.
-//           </p>
+//           <p>{aboutData?.about}</p>
 //         </div>
 //       </section>
 
@@ -84,7 +82,7 @@
 //         </button>
 //       </section>
 
-//       {/* Common Problems Section (בעיות נפוצות) */}
+//       {/* Common Problems Section (Dynamically fetched) */}
 //       <section
 //         id="problem-list"
 //         className="bg-gradient-to-r from-cyan-50 to-purple-200 p-8 rounded-3xl shadow-lg mb-12"
@@ -94,24 +92,21 @@
 //           dir="rtl"
 //           className="list-disc list-inside text-right text-xl text-gray-700 space-y-4"
 //         >
-//           <li>כאבי גב תחתון</li>
-//           <li>בריחת שתן</li>
-//           <li>צניחת איברי אגן</li>
-//           <li>כאבים בזמן יחסים</li>
-//           <li>בעיות בתפקוד המעי</li>
-//           <li>כאבי מפרקים ושרירים</li>
-//           <li>כאבים כרוניים</li>
+//           {aboutData?.problems.map((problem, index) => (
+//             <li key={index}>{problem}</li>
+//           ))}
 //         </ul>
 //       </section>
 
-//       {/* Treatments Section (טיפולים) */}
+//       {/* Treatments Section (Dynamically fetched) */}
 //       <section
 //         id="treatment-list"
 //         className="bg-gradient-to-r from-purple-100 to-purple-300 p-8 rounded-3xl shadow-lg mb-12"
 //       >
-//         <h2 className="text-3xl font-semibold text-center mb-4">טיפולים</h2>
-//         {loading && <p>Loading treatments...</p>}
-//         {error && <p className="text-red-500">{error}</p>}
+//         <h2 className="text-3xl font-bold text-center mb-6 cursor-pointer hover:text-purple-600 transition duration-300" 
+//            onClick={() => setSelectedSection("treatments")} >טיפולים</h2>
+//         {treatmentsLoading && <p>Loading treatments...</p>}
+//         {treatmentsError && <p className="text-red-500">{treatmentsError}</p>}
 //         <ul
 //           dir="rtl"
 //           className="list-disc list-inside text-right text-xl text-gray-700 space-y-2"
@@ -120,8 +115,6 @@
 //           {treatments.map((treatment) => (
 //             <li
 //               key={treatment.id}
-//               onClick={() => setSelectedSection("treatments")}
-//               className="cursor-pointer hover:text-purple-600 transition duration-300"
 //             >
 //               {treatment.name}
 //             </li>
@@ -129,12 +122,12 @@
 //         </ul>
 //       </section>
 
-//       {/* Patients Recommend Section (מטופלים ממליצים) */}
+//       {/* Patients Recommend Section (Static Content) */}
 //       <section
 //         id="moreInfo"
 //         className="bg-purple-200 p-8 rounded-3xl shadow-lg mb-12"
 //       >
-//         <h2 className="text-3xl font-semibold text-center mb-4">
+//         <h2 className="text-3xl font-bold text-center mb-4">
 //           מטופלים ממליצים
 //         </h2>
 //         <ul
@@ -176,9 +169,12 @@
 //   );
 // }
 
-import { useAbout } from "../hooks/useAbout"; // Import the new useAbout hook
+
+import { useState } from "react";
+import { useAbout } from "../hooks/useAbout"; 
 import ContactForm from "./ContactForm";
-import { useTreatments } from "../hooks/useTreatments"; // Import your treatments hook
+import { useTreatments } from "../hooks/useTreatments"; 
+import TreatmentCard from "./TreatmentCard"; // Import the TreatmentCard component
 
 interface HomePageContentProps {
   setSelectedSection: (section: string) => void;
@@ -187,28 +183,28 @@ interface HomePageContentProps {
 export default function HomePageContent({
   setSelectedSection,
 }: HomePageContentProps) {
+  const [selectedTreatmentId, setSelectedTreatmentId] = useState<string | null>(null); // State to track selected treatment
+
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
-  // Use the useAbout hook to fetch the About and Problems sections
   const { aboutData, loading: aboutLoading, error: aboutError } = useAbout();
-  
-  // Use the useTreatments hook to fetch treatments from Firestore
   const { treatments, loading: treatmentsLoading, error: treatmentsError } = useTreatments();
 
-  const handleFormSubmit = async (data: {
-    name: string;
-    email: string;
-    tel: string;
-    message: string;
-  }) => {
+  // Find the special treatment and separate it from the rest
+  const specialTreatment = treatments.find(
+    (treatment) => treatment.id === "GUGjGKdrVrRH4DtcRVy0"
+  );
+  const otherTreatments = treatments.filter(
+    (treatment) => treatment.id !== "GUGjGKdrVrRH4DtcRVy0"
+  );
+
+  const handleFormSubmit = async (data: { name: string; email: string; tel: string; message: string; }) => {
     try {
       const res = await fetch("/api/sendMail", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
 
@@ -223,19 +219,22 @@ export default function HomePageContent({
     }
   };
 
+  // Function to handle opening/closing treatment cards
+  const toggleTreatmentCard = (treatmentId: string) => {
+    setSelectedTreatmentId(selectedTreatmentId === treatmentId ? null : treatmentId);
+  };
+
   if (aboutLoading || treatmentsLoading) return <p>Loading...</p>;
-  if (aboutError || treatmentsError)
-    return <p>Error: {aboutError || treatmentsError}</p>;
+  if (aboutError || treatmentsError) return <p>Error: {aboutError || treatmentsError}</p>;
 
   return (
-    <div className="max-w-screen-xlg mx-auto">
+    <div className="max-w-screen-xl mx-auto">
       {/* Welcome Section */}
       <section>
-        <h1 className="text-5xl font-bold text-center mb-4"> ברוכים הבאים </h1>
-        <p className="text-lg text-center">אילנה פיוזתרפיסטית</p>
+        <h1 className="text-5xl font-bold text-center mb-4">Welcome</h1>
       </section>
 
-      {/* About Section (Dynamically fetched) */}
+      {/* About Section */}
       <section className="bg-gray-200 rounded-3xl shadow-lg p-8 mb-12">
         <div dir="rtl" className="text-center text-xl text-gray-700 space-y-6">
           <p>{aboutData?.about}</p>
@@ -258,7 +257,7 @@ export default function HomePageContent({
         </button>
       </section>
 
-      {/* Common Problems Section (Dynamically fetched) */}
+      {/* Common Problems Section */}
       <section
         id="problem-list"
         className="bg-gradient-to-r from-cyan-50 to-purple-200 p-8 rounded-3xl shadow-lg mb-12"
@@ -274,39 +273,71 @@ export default function HomePageContent({
         </ul>
       </section>
 
-      {/* Treatments Section (Dynamically fetched) */}
+      {/* Treatments Section */}
       <section
         id="treatment-list"
         className="bg-gradient-to-r from-purple-100 to-purple-300 p-8 rounded-3xl shadow-lg mb-12"
       >
-        <h2 className="text-3xl font-semibold text-center mb-4">טיפולים</h2>
+        <h2 className="text-3xl font-bold text-center mb-6 cursor-pointer hover:text-purple-600 transition duration-300" 
+          onClick={() => setSelectedSection("treatments")}>
+          טיפולים
+        </h2>
+
         {treatmentsLoading && <p>Loading treatments...</p>}
         {treatmentsError && <p className="text-red-500">{treatmentsError}</p>}
-        <ul
-          dir="rtl"
-          className="list-disc list-inside text-right text-xl text-gray-700 space-y-2"
-        >
-          {/* Dynamically render treatments from Firestore */}
-          {treatments.map((treatment) => (
-            <li
-              key={treatment.id}
-              onClick={() => setSelectedSection("treatments")}
-              className="cursor-pointer hover:text-purple-600 transition duration-300"
-            >
+
+        {/* Render other treatments */}
+        <ul dir="rtl" className="list-disc list-inside text-right text-xl text-gray-700 space-y-2">
+          {otherTreatments.map((treatment) => (
+            <li key={treatment.id} className="cursor-pointer hover:text-purple-600" onClick={() => toggleTreatmentCard(treatment.id)}>
               {treatment.name}
+
+              {/* Conditionally render the TreatmentCard if this treatment is clicked */}
+              {selectedTreatmentId === treatment.id && (
+                <div className="mt-4" onClick={(e) => e.stopPropagation() /* Prevent closing when clicking inside card */}>
+                  <TreatmentCard
+                    treatment={treatment}
+                    onDelete={() => console.log(`Delete treatment with id: ${treatment.id}`)}
+                    onEdit={() => console.log(`Edit treatment with id: ${treatment.id}`)}
+                    isAdmin={false}
+                  />
+                </div>
+              )}
             </li>
           ))}
         </ul>
+
+        {/* Separator Line */}
+        <div className="my-8 border-t border-gray-400"></div>
+
+        {/* Render special treatment at the bottom */}
+        {specialTreatment && (
+          <ul dir="rtl" className="list-disc list-inside text-right text-xl text-gray-700 space-y-2">
+            <li key={specialTreatment.id} className="cursor-pointer hover:text-purple-600" onClick={() => toggleTreatmentCard(specialTreatment.id)}>
+              {specialTreatment.name}
+
+              {/* Conditionally render the TreatmentCard if this treatment is clicked */}
+              {selectedTreatmentId === specialTreatment.id && (
+                <div className="mt-4" onClick={(e) => e.stopPropagation() /* Prevent closing when clicking inside card */}>
+                  <TreatmentCard
+                    treatment={specialTreatment}
+                    onDelete={() => console.log(`Delete special treatment with id: ${specialTreatment.id}`)}
+                    onEdit={() => console.log(`Edit special treatment with id: ${specialTreatment.id}`)}
+                    isAdmin={false}
+                  />
+                </div>
+              )}
+            </li>
+          </ul>
+        )}
       </section>
 
-      {/* Patients Recommend Section (Static Content) */}
+      {/* Patients Recommend Section */}
       <section
         id="moreInfo"
         className="bg-purple-200 p-8 rounded-3xl shadow-lg mb-12"
       >
-        <h2 className="text-3xl font-semibold text-center mb-4">
-          מטופלים ממליצים
-        </h2>
+        <h2 className="text-3xl font-bold text-center mb-4">מטופלים ממליצים</h2>
         <ul
           dir="rtl"
           className="list-disc list-inside text-right text-xl text-gray-700 space-y-2"
@@ -327,9 +358,7 @@ export default function HomePageContent({
         className="bg-gray-200 mt-12 p-6 rounded-lg shadow-lg"
         dir="rtl"
       >
-        <h2 className="text-2xl font-bold text-center mb-6">
-          השאר פרטים ליצירת קשר
-        </h2>
+        <h2 className="text-2xl font-bold text-center mb-6">השאר פרטים ליצירת קשר</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <ContactForm onSubmit={handleFormSubmit} />
 
