@@ -17,7 +17,7 @@ const AccessibilityMenu = () => {
       )}
 
       <button
-        className="bg-blue-600 text-white p-3 text-4xl rounded-full shadow-lg focus:outline-none transition-transform duration-300 hover:scale-110"
+        className="bg-blue-600 text-white p-3 text-2xl rounded-full shadow-lg focus:outline-none transition-transform duration-300 hover:scale-110"
         onClick={() => setMenuOpen(!menuOpen)}
         aria-label="Toggle Accessibility Menu"
       >
