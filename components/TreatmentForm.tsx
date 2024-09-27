@@ -37,51 +37,51 @@ export default function TreatmentForm({ initialData, onSubmit, isEditing = false
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-lg">
-      <h2 className="text-2xl font-bold mb-6 text-gray-700">{isEditing ? "עריכת טיפול" : "הוספת טיפול חדש"}</h2>
+    <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg">
+      <h3 className="text-2xl font-bold mb-6 text-gray-700 dark:text-gray-200">{isEditing ? "עריכת טיפול" : "הוספת טיפול חדש"}</h3>
       
       <div className="mb-4">
-        <label className="block text-gray-600 font-semibold mb-2" htmlFor="name">שם הטיפול</label>
+        <label className="block text-gray-600 dark:text-gray-300 font-semibold mb-2" htmlFor="name">שם הטיפול</label>
         <input 
           id="name" 
           type="text" 
           value={name} 
           onChange={(e) => setName(e.target.value)} 
           required 
-          className="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
+          className="w-full px-4 py-2 border rounded-lg text-gray-700 dark:text-gray-200 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
           placeholder="Enter treatment name"
         />
       </div>
 
       <div className="mb-4">
-        <label className="block text-gray-600 font-semibold mb-2" htmlFor="description">תיאור</label>
+        <label className="block text-gray-600 dark:text-gray-300 font-semibold mb-2" htmlFor="description">תיאור</label>
         <textarea 
           id="description" 
           value={description} 
           onChange={(e) => setDescription(e.target.value)} 
           required 
-          className="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm" 
+          className="w-full px-4 py-2 border rounded-lg text-gray-700 dark:text-gray-200 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm" 
           rows={4}
           placeholder="Describe the treatment"
         />
       </div>
 
       <div className="mb-6">
-        <label className="block text-gray-600 font-semibold mb-2" htmlFor="image">כתובת אינטרנט של התמונה</label>
+        <label className="block text-gray-600 dark:text-gray-300 font-semibold mb-2" htmlFor="image">כתובת אינטרנט של התמונה</label>
         <input 
           id="image" 
           type="url" 
           value={image} 
           onChange={(e) => setImage(e.target.value)} 
           required 
-          className="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm" 
+          className="w-full px-4 py-2 border rounded-lg text-gray-700 dark:text-gray-200 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm" 
           placeholder="https://example.com/image.jpg"
         />
       </div>
 
       <button 
         type="submit" 
-        className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-lg shadow-md transition duration-300"
+        className="w-full bg-blue-500 dark:bg-blue-700 hover:bg-blue-600 dark:hover:bg-blue-800 text-white font-bold py-3 rounded-lg shadow-md transition duration-300"
       >
         {isEditing ? "לשמור מעודכן" : "הוספת תוכן"}
       </button>

@@ -1,16 +1,16 @@
 import { useTreatments } from '../hooks/useTreatments';
 import TreatmentCard from '../components/TreatmentCard';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 export default function Treatments() {
   const { treatments, loading, error, deleteTreatment } = useTreatments();
 
   const handleEdit = (treatmentId: string) => {
     console.log(`Edit treatment with id: ${treatmentId}`);
-    // Implement your edit logic here
   };
 
   if (loading) {
-    return <p>Loading treatments...</p>;
+     return <LoadingSpinner />;
   }
 
   if (error) {
