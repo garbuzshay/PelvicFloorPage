@@ -23,3 +23,9 @@ html {
     background: rgb(26, 23, 23);
     color: white !important;
 }
+
+.focused-reading {
+  background-color: rgba(255, 255, 0, 0.3); /* Highlight the paragraph with yellow */
+  outline: 2px solid rgba(255, 255, 0, 0.6); /* Add a border */
+  transition: background-color 0.3s ease, outline 0.3s ease;
+}
