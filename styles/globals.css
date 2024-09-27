@@ -13,9 +13,7 @@ html {
   
 }
 
-.dark h2 {
-  color: black !important; /* Make links visible in high contrast */
-}
+
 
 .dark img {
   border: 1px solid white; /* Make images visible in contrast mode */

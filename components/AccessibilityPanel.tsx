@@ -304,7 +304,7 @@ interface AccessibilityPanelProps {
   
     return (
       <div
-        className={`fixed top-0 ${position === "right" ? "right-4" : "left-4"} w-64 bg-white dark:bg-contrast-bg dark:text-contrast-text p-4 shadow-lg rounded-lg z-50`}
+        className={`fixed top-0 ${position === "right" ? "right-4" : "left-4"} w-64 bg-gray-200 dark:bg-contrast-bg dark:text-contrast-text p-4 shadow-lg rounded-lg z-50`}
       >
         <h3  dir="rtl" className="text-lg font-bold mb-4">הגדרות נגישות</h3>
   
@@ -330,7 +330,7 @@ interface AccessibilityPanelProps {
         </button>
   
         <button
-          className="block w-full p-2 mb-2 bg-yellow-500 dark:bg-contrast-button-bg dark:text-contrast-button-text text-white rounded"
+          className="block w-full p-2 mb-2 bg-yellow-800 dark:bg-contrast-button-bg dark:text-contrast-button-text text-white rounded"
           onClick={toggleImages}
         >
           הסתרת תמונות
