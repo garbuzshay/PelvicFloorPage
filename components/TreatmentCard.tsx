@@ -145,7 +145,7 @@ export default function TreatmentCard({
         <img
           src={treatment.image}
           alt={treatment.name}
-          className="w-72 h-48 md:h-64 lg:h-72  rounded-lg"
+          className=" md:h-64 lg:h-72  rounded-lg"
         />
       </div>
 
