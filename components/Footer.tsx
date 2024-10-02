@@ -36,7 +36,7 @@ export default function Footer() {
             aria-expanded={showDisclaimer}
             aria-controls="disclaimer"
           >
-            הצהרת נגישות
+            הצהרת אחריות
           </button>
         </div>
       </footer>
